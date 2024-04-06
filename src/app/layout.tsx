@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Container } from "react-bootstrap";
+import { Toaster } from "react-hot-toast";
 import Navigation from "@/components/navigation";
 
 import "./globals.css";
@@ -23,8 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navigation />
-        
         <Container>
+          <Toaster position="top-right" />
           {children}
         </Container>
       </body>

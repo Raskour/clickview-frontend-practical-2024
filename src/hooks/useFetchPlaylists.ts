@@ -28,7 +28,7 @@ const useFetchPlayLists = () => {
         fetchPlaylists();
     }, []);
 
-    return { playlists, isLoading, error };
+    return { playlists, isLoading, error, setPlaylists };
 };
 
 export default useFetchPlayLists;
