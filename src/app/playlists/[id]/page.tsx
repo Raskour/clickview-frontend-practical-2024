@@ -6,7 +6,8 @@ import useFetchPlayLists from "@/hooks/useFetchPlaylists";
 import { PlaylistItem } from "@/components/playlist-item";
 
 export default function PlaylistPage({ params }: { params: { id: string } }) {
-  const { playlists, isLoading, error } = useFetchPlayLists();
+  const { playlists, isLoading, error, handleRemovePlaylist } =
+    useFetchPlayLists();
 
   if (isLoading) {
     return <Spinner animation="border" />;
@@ -24,5 +25,10 @@ export default function PlaylistPage({ params }: { params: { id: string } }) {
     return <Alert variant="danger">Playlist not found</Alert>;
   }
 
-  return <PlaylistItem playlist={playlist} />;
+  return (
+    <PlaylistItem
+      playlist={playlist}
+      handleRemovePlaylist={handleRemovePlaylist}
+    />
+  );
 }

@@ -1,12 +1,31 @@
 "use client";
-import { Alert, Spinner } from "react-bootstrap";
+
+import { useState } from "react";
+
+import { Alert, Button, Spinner, Stack } from "react-bootstrap";
 import Link from "next/link";
 
 import { PlaylistItem } from "@/components/playlist-item";
 import useFetchPlayLists from "@/hooks/useFetchPlaylists";
+import AddPlaylistDialog from "@/components/add-playlist-dialog";
 
 export default function PlaylistsPage() {
-  const { playlists, isLoading, error } = useFetchPlayLists();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const { playlists, isLoading, error, setPlaylists, handleRemovePlaylist } =
+    useFetchPlayLists();
+
+  const handleSubmit = (name: string, description: string) => {
+    // Add playlist logic here
+    setPlaylists([
+      ...playlists,
+      { name, description, id: Date.now(), videoIds: [] },
+    ]);
+    handleClose();
+  };
 
   if (isLoading) {
     return <Spinner animation="border" />;
@@ -18,7 +37,17 @@ export default function PlaylistsPage() {
 
   return (
     <>
-      <h1>Playlists route</h1>
+      <Stack direction="horizontal" gap={2} className="mb-4">
+        <h1>Playlists route</h1>
+        <Button
+          variant="outline-primary"
+          size="sm"
+          onClick={handleShow}
+          className="p-2 ms-auto"
+        >
+          Create Playlist
+        </Button>
+      </Stack>
 
       {playlists.map((playlist) => (
         <Link
@@ -26,9 +55,17 @@ export default function PlaylistsPage() {
           href={`/playlists/${playlist.id}`}
           className="text-decoration-none"
         >
-          <PlaylistItem playlist={playlist} />
+          <PlaylistItem
+            playlist={playlist}
+            handleRemovePlaylist={handleRemovePlaylist}
+          />
         </Link>
       ))}
+      <AddPlaylistDialog
+        show={show}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+      />
     </>
   );
 }
