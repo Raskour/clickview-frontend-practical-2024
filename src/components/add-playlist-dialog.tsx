@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 interface PlaylistModalProps {
-  show: boolean;
   handleClose: () => void;
   handleSubmit: (name: string, description: string) => void;
 }
 
 const AddPlaylistDialog = ({
-  show,
   handleClose,
   handleSubmit,
 }: PlaylistModalProps) => {
@@ -19,7 +17,7 @@ const AddPlaylistDialog = ({
   const handleDescriptionChange = (e) => setPlaylistDescription(e.target.value);
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Create New Playlist</Modal.Title>
       </Modal.Header>

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { PlaylistItem } from "@/components/playlist-item";
 import useFetchPlayLists from "@/hooks/useFetchPlaylists";
 import AddPlaylistDialog from "@/components/add-playlist-dialog";
+import toast from "react-hot-toast";
 
 export default function PlaylistsPage() {
   const [show, setShow] = useState(false);
@@ -19,11 +20,11 @@ export default function PlaylistsPage() {
     useFetchPlayLists();
 
   const handleSubmit = (name: string, description: string) => {
-    // Add playlist logic here
     setPlaylists([
       ...playlists,
       { name, description, id: Date.now(), videoIds: [] },
     ]);
+    toast.success("Playlist created successfully");
     handleClose();
   };
 
@@ -61,11 +62,12 @@ export default function PlaylistsPage() {
           />
         </Link>
       ))}
-      <AddPlaylistDialog
-        show={show}
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-      />
+      {show && (
+        <AddPlaylistDialog
+          handleClose={handleClose}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </>
   );
 }
