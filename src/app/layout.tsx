@@ -7,6 +7,7 @@ import Navigation from "@/components/navigation";
 import "./globals.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { PlayListProvider } from "@/context/playlist-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,7 @@ export default function RootLayout({
         <Navigation />
         <Container>
           <Toaster position="top-right" />
-          {children}
+          <PlayListProvider>{children}</PlayListProvider>
         </Container>
       </body>
     </html>

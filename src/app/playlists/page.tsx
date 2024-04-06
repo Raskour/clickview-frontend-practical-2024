@@ -6,9 +6,9 @@ import { Alert, Button, Spinner, Stack } from "react-bootstrap";
 import Link from "next/link";
 
 import { PlaylistItem } from "@/components/playlist-item";
-import useFetchPlayLists from "@/hooks/useFetchPlaylists";
 import AddPlaylistDialog from "@/components/add-playlist-dialog";
 import toast from "react-hot-toast";
+import { usePlayListContext } from "@/context/playlist-context";
 
 export default function PlaylistsPage() {
   const [show, setShow] = useState(false);
@@ -17,7 +17,7 @@ export default function PlaylistsPage() {
   const handleShow = () => setShow(true);
 
   const { playlists, isLoading, error, setPlaylists, handleRemovePlaylist } =
-    useFetchPlayLists();
+    usePlayListContext();
 
   const handleSubmit = (name: string, description: string) => {
     setPlaylists([

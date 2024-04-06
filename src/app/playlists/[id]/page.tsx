@@ -2,12 +2,12 @@
 
 import { Spinner, Alert } from "react-bootstrap";
 
-import useFetchPlayLists from "@/hooks/useFetchPlaylists";
 import { PlaylistItem } from "@/components/playlist-item";
+import { usePlayListContext } from "@/context/playlist-context";
 
 export default function PlaylistPage({ params }: { params: { id: string } }) {
   const { playlists, isLoading, error, handleRemovePlaylist } =
-    useFetchPlayLists();
+    usePlayListContext();
 
   if (isLoading) {
     return <Spinner animation="border" />;

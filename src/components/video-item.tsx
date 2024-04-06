@@ -9,14 +9,14 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 
 import { Video } from "../interfaces/video";
-import useFetchPlayLists from "@/hooks/useFetchPlaylists";
+import { usePlayListContext } from "@/context/playlist-context";
 
 interface VideoItemProps {
   video: Video;
 }
 
 export default function VideoItem(props: VideoItemProps) {
-  const { playlists, isLoading, setPlaylists } = useFetchPlayLists();
+  const { playlists, isLoading, setPlaylists } = usePlayListContext();
   const { video } = props;
 
   const isVideoInPlaylist = (videoId: number, playlistId: number) => {
