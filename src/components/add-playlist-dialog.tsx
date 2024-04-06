@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 interface PlaylistModalProps {
@@ -13,8 +13,10 @@ const AddPlaylistDialog = ({
   const [playlistName, setPlaylistName] = useState("");
   const [playlistDescription, setPlaylistDescription] = useState("");
 
-  const handleNameChange = (e) => setPlaylistName(e.target.value);
-  const handleDescriptionChange = (e) => setPlaylistDescription(e.target.value);
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setPlaylistName(e.target.value);
+  const handleDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
+    setPlaylistDescription(e.target.value);
 
   return (
     <Modal show onHide={handleClose}>
